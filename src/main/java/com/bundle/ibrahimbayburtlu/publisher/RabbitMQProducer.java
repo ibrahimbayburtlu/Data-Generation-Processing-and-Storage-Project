@@ -22,6 +22,6 @@ public class RabbitMQProducer{
 
     public void sendMessage(String message){
         rabbitTemplate.convertAndSend(exchange, routingKey, message);
-        System.out.println("Veri message queue'ye gönderildi: " + message);
+        System.out.println("Veri database(MySQL) queue'ye gönderildi: " + message);
     }
 }

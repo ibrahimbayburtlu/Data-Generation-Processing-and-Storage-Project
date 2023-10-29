@@ -1,9 +1,6 @@
 package com.bundle.ibrahimbayburtlu.config;
 
-import org.springframework.amqp.core.Binding;
-import org.springframework.amqp.core.BindingBuilder;
-import org.springframework.amqp.core.Queue;
-import org.springframework.amqp.core.TopicExchange;
+import org.springframework.amqp.core.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,7 +9,10 @@ import org.springframework.context.annotation.Configuration;
 public class RabbitMQConfig {
 
     @Value("${rabbitmq.queue.name}")
-    private String queue;
+    private String queue1;
+
+    @Value("${rabbitmq.queue.name.mongo}")
+    private String queue2;
 
     @Value("${rabbitmq.exchange.name}")
     private String exchange;
@@ -21,8 +21,13 @@ public class RabbitMQConfig {
     private String routingKey;
 
     @Bean
-    public Queue queue() {
-        return new Queue(queue);
+    public Queue queue1() {
+        return new Queue(queue1);
+    }
+
+    @Bean
+    public Queue queue2() {
+        return new Queue(queue2);
     }
 
     @Bean
@@ -31,7 +36,13 @@ public class RabbitMQConfig {
     }
 
     @Bean
-    public Binding binding(Queue queue, TopicExchange exchange) {
-        return BindingBuilder.bind(queue).to(exchange).with(routingKey);
+    public Binding binding1(Queue queue1, TopicExchange exchange) {
+        return BindingBuilder.bind(queue1).to(exchange).with(routingKey);
     }
+
+    @Bean
+    public Binding binding2(Queue queue2, TopicExchange exchange) {
+        return BindingBuilder.bind(queue2).to(exchange).with(routingKey);
+    }
+
 }
