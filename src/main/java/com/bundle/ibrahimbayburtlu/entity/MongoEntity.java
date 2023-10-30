@@ -15,8 +15,6 @@ public class MongoEntity {
     private String content;
     private List<MongoEntity> nestedMessages;
 
-    // Getter ve Setter metotlarını burada ekleyebilirsiniz.
-
 
     public MongoEntity() {
         this.id = String.valueOf(UUID.randomUUID());

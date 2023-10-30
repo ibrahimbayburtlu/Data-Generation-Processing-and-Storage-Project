@@ -5,9 +5,13 @@ import com.bundle.ibrahimbayburtlu.repository.MessageRepository;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Service
 public class DatabaseConsumer {
+
+    private static final Logger logger = LoggerFactory.getLogger(DatabaseConsumer.class);
 
     private final MessageRepository messageRepository;
 
@@ -18,12 +22,10 @@ public class DatabaseConsumer {
 
     @RabbitListener(queues = {"${rabbitmq.queue.name}"})
     public void consume(String message){
-        System.out.println("Received a message from RabbitMQ: " + message);
-
-        // Mesajı veritabanına kaydet :)
+        logger.info("mySQL Consumer Received a message from RabbitMQ: " + message);
         MessageEntity messageEntity = new MessageEntity();
         messageEntity.setMessage(message);
         messageRepository.save(messageEntity);
-        System.out.println("Mesaj database kaydetildi :)");
+        logger.info("Message saved in mySQL database :) ");
     }
 }

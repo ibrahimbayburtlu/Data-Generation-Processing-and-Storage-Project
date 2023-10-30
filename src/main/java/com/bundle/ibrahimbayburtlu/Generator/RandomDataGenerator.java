@@ -1,5 +1,7 @@
 package com.bundle.ibrahimbayburtlu.Generator;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -15,6 +17,8 @@ import java.util.Random;
 @Service
 public class RandomDataGenerator implements Runnable {
 
+    private static final Logger logger = LoggerFactory.getLogger(RandomDataGenerator.class);
+
     @Override
     public void run() {
         for (int i = 0; i < 5; i++) {
@@ -26,7 +30,7 @@ public class RandomDataGenerator implements Runnable {
 
             String data = "Timestamp: " + timestamp + ", Random Integer: " + randomNumber + ", Last 2 Characters: " + lastTwoCharacters;
 
-            System.out.println(data);
+            logger.info(data);
             writeToSocket(data);
 
             try {

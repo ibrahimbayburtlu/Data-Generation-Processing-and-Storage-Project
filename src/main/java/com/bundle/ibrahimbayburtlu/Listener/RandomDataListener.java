@@ -1,6 +1,9 @@
 package com.bundle.ibrahimbayburtlu.Listener;
 
+import com.bundle.ibrahimbayburtlu.consumer.MongoDBConsumer;
 import com.bundle.ibrahimbayburtlu.publisher.RabbitMQProducer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +13,8 @@ import java.net.Socket;
 
 @Service
 public class RandomDataListener implements Runnable {
+
+    private static final Logger logger = LoggerFactory.getLogger(RandomDataListener.class);
 
     private final RabbitMQProducer rabbitMQProducer;
 
@@ -22,11 +27,10 @@ public class RandomDataListener implements Runnable {
     public void run() {
         int port = 12345;
         try (ServerSocket serverSocket = new ServerSocket(port)) {
-            System.out.println("Socket dinleniyor...");
+            logger.info("Socket is resting...");
             while (true) {
                 try (Socket socket = serverSocket.accept();
                      BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()))) {
-                    System.out.println("Socket içine girdi");
                     String data = reader.readLine();
                     processAndSendToQueueOrFile(data);
                 }
@@ -47,17 +51,17 @@ public class RandomDataListener implements Runnable {
                 if (secondFieldValue > 90) {
                     sendMessageToQueue(data);
                 } else {
-                    System.out.println("File data eklendi!!!");
+                    logger.info("File data added!!!");
                     writeToFile(data);
                 }
             } catch (NumberFormatException e) {
-                System.err.println("Hata: Sayısal değere dönüştürme başarısız.");
+                logger.info("Error: Conversion to numeric value failed.");
             }
         }
     }
 
     private void sendMessageToQueue(String data) {
-        System.out.println("Veri message queue'ye gönderiliyor: " + data);
+        logger.info("Data is being sent to the message queue: " + data);
         rabbitMQProducer.sendMessage(data);
     }
 

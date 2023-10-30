@@ -14,11 +14,11 @@ public class BundleApplication {
 	public static void main(String[] args) {
 		ApplicationContext context = SpringApplication.run(BundleApplication.class, args);
 
-		// Veri üretimi iş parçacığını başlat
+		// Start data generation thread
 		Thread dataGeneratorThread = new Thread(context.getBean(RandomDataGenerator.class));
 		dataGeneratorThread.start();
 
-		// Veri dinleme iş parçacığını başlat
+		// Start data listening thread
 		Thread dataListenerThread = new Thread(context.getBean(RandomDataListener.class));
 		dataListenerThread.start();
 	}
