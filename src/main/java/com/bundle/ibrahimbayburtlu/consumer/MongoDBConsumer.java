@@ -8,6 +8,8 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class MongoDBConsumer {
 
@@ -21,28 +23,34 @@ public class MongoDBConsumer {
     }
 
     @RabbitListener(queues = {"${rabbitmq.queue.name.mongo}"})
-    public void consume(String message){
-
-        logger.info("MongoDB Message : " + message);
+    public void consume(String message) {
+        logger.info("MongoDB Message: " + message);
 
         int hashValue = Integer.parseInt(message.substring(message.length() - 2), 16);
+
         MongoEntity mongoEntity = new MongoEntity();
-
         mongoEntity.setContent(message);
-        // Available Hatası verdi nedeni Driver kütüphanesi güncel değil bakılacak.
-        /*
-        if (hashValue > 99) {
-            List<MongoEntity> existingRecords = mongoDBRepository.findAll();
-            if (!existingRecords.isEmpty()) {
-                MongoEntity existingRecord = existingRecords.get(0);
-                existingRecord.getNestedMessages().add(mongoEntity);
-                mongoDBRepository.save(existingRecord);
-            }
 
-            System.out.println(existingRecords);
+        List<MongoEntity> existingRecords = mongoDBRepository.findAll();
+        if (!existingRecords.isEmpty()) {
+            MongoEntity lastRecord = existingRecords.get(existingRecords.size() - 1);
+
+            int lastHashValue = Integer.parseInt(lastRecord.getContent().substring(lastRecord.getContent().length() - 2), 16);
+
+            if (hashValue > 99 && lastHashValue > 99) {
+                lastRecord.addNestedMessage(mongoEntity);
+                mongoDBRepository.save(lastRecord);
+            } else {
+                MongoEntity newRecord = new MongoEntity();
+                newRecord.setContent(message);
+                mongoDBRepository.save(newRecord);
+            }
+        } else {
+            MongoEntity newRecord = new MongoEntity();
+            newRecord.setContent(message);
+            mongoDBRepository.save(newRecord);
         }
-        */
-        mongoDBRepository.save(mongoEntity);
+
         logger.info("MongoDB message logged");
     }
 }

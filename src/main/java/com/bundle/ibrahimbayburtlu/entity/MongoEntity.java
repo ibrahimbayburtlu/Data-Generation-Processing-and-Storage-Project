@@ -3,6 +3,7 @@ package com.bundle.ibrahimbayburtlu.entity;
 import jakarta.persistence.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -15,17 +16,21 @@ public class MongoEntity {
     private String content;
     private List<MongoEntity> nestedMessages;
 
-
     public MongoEntity() {
         this.id = String.valueOf(UUID.randomUUID());
+        this.nestedMessages = new ArrayList<>(); // Boş bir liste oluşturun
     }
 
     public List<MongoEntity> getNestedMessages() {
         return nestedMessages;
     }
 
-    public void setNestedMessages(List<MongoEntity> nestedMessages) {
-        this.nestedMessages = nestedMessages;
+    // Yeni bir iç içe geçmiş mesaj eklemek için bu metodu kullanabilirsiniz
+    public void addNestedMessage(MongoEntity nestedMessage) {
+        if (this.nestedMessages == null) {
+            this.nestedMessages = new ArrayList<>();
+        }
+        this.nestedMessages.add(nestedMessage);
     }
 
     public String getContent() {
