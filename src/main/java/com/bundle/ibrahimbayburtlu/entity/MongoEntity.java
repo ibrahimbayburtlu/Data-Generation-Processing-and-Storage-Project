@@ -18,14 +18,14 @@ public class MongoEntity {
 
     public MongoEntity() {
         this.id = String.valueOf(UUID.randomUUID());
-        this.nestedMessages = new ArrayList<>(); // Boş bir liste oluşturun
+        this.nestedMessages = new ArrayList<>();
     }
 
     public List<MongoEntity> getNestedMessages() {
         return nestedMessages;
     }
 
-    // Yeni bir iç içe geçmiş mesaj eklemek için bu metodu kullanabilirsiniz
+
     public void addNestedMessage(MongoEntity nestedMessage) {
         if (this.nestedMessages == null) {
             this.nestedMessages = new ArrayList<>();
