@@ -23,7 +23,7 @@ public class MongoDBConsumer {
     }
 
     @RabbitListener(queues = {"${rabbitmq.queue.name.mongo}"})
-    public void consume(String message) {
+    public void saveMessageToDatabaseMongo(String message) {
         logger.info("MongoDB Message: " + message);
 
         int hashValue = Integer.parseInt(message.substring(message.length() - 2), 16);

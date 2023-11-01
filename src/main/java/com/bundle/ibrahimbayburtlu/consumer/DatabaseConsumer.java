@@ -21,7 +21,7 @@ public class DatabaseConsumer {
     }
 
     @RabbitListener(queues = {"${rabbitmq.queue.name}"})
-    public void consume(String message){
+    public void saveMessageToDatabase(String message){
         logger.info("mySQL Consumer Received a message from RabbitMQ: " + message);
         MessageEntity messageEntity = new MessageEntity();
         messageEntity.setMessage(message);

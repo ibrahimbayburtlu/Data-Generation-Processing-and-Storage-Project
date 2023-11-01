@@ -9,10 +9,10 @@ import org.springframework.context.annotation.Configuration;
 public class RabbitMQConfig {
 
     @Value("${rabbitmq.queue.name}")
-    private String queue1;
+    private String userCreatedQueue;
 
     @Value("${rabbitmq.queue.name.mongo}")
-    private String queue2;
+    private String mongoDataQueue;
 
     @Value("${rabbitmq.exchange.name}")
     private String exchange;
@@ -21,13 +21,13 @@ public class RabbitMQConfig {
     private String routingKey;
 
     @Bean
-    public Queue queue1() {
-        return new Queue(queue1);
+    public Queue userCreatedQueue() {
+        return new Queue(userCreatedQueue);
     }
 
     @Bean
-    public Queue queue2() {
-        return new Queue(queue2);
+    public Queue mongoDataQueue() {
+        return new Queue(mongoDataQueue);
     }
 
     @Bean
@@ -36,13 +36,13 @@ public class RabbitMQConfig {
     }
 
     @Bean
-    public Binding binding1(Queue queue1, TopicExchange exchange) {
-        return BindingBuilder.bind(queue1).to(exchange).with(routingKey);
+    public Binding userCreatedQueueBinding(Queue userCreatedQueue, TopicExchange exchange) {
+        return BindingBuilder.bind(userCreatedQueue).to(exchange).with(routingKey);
     }
 
     @Bean
-    public Binding binding2(Queue queue2, TopicExchange exchange) {
-        return BindingBuilder.bind(queue2).to(exchange).with(routingKey);
+    public Binding mongoDataQueueBinding(Queue mongoDataQueue, TopicExchange exchange) {
+        return BindingBuilder.bind(mongoDataQueue).to(exchange).with(routingKey);
     }
 
 }
