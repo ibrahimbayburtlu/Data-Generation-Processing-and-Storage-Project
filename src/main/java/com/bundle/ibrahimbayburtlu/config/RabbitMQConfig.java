@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 public class RabbitMQConfig {
 
     @Value("${rabbitmq.queue.name}")
-    private String userCreatedQueue;
+    private String mySQLDataQueue;
 
     @Value("${rabbitmq.queue.name.mongo}")
     private String mongoDataQueue;
@@ -21,8 +21,8 @@ public class RabbitMQConfig {
     private String routingKey;
 
     @Bean
-    public Queue userCreatedQueue() {
-        return new Queue(userCreatedQueue);
+    public Queue mySQLDataQueue() {
+        return new Queue(mySQLDataQueue);
     }
 
     @Bean
@@ -36,8 +36,8 @@ public class RabbitMQConfig {
     }
 
     @Bean
-    public Binding userCreatedQueueBinding(Queue userCreatedQueue, TopicExchange exchange) {
-        return BindingBuilder.bind(userCreatedQueue).to(exchange).with(routingKey);
+    public Binding mySQLQueueBinding(Queue mySQLDataQueue, TopicExchange exchange) {
+        return BindingBuilder.bind(mySQLDataQueue).to(exchange).with(routingKey);
     }
 
     @Bean
