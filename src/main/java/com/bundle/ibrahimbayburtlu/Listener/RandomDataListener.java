@@ -1,6 +1,5 @@
 package com.bundle.ibrahimbayburtlu.Listener;
 
-import com.bundle.ibrahimbayburtlu.consumer.MongoDBConsumer;
 import com.bundle.ibrahimbayburtlu.publisher.RabbitMQProducer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,15 +31,15 @@ public class RandomDataListener implements Runnable {
                 try (Socket socket = serverSocket.accept();
                      BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()))) {
                     String data = reader.readLine();
-                    processAndSendToQueueOrFile(data);
+                    processData(data);
                 }
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
-    private void processAndSendToQueueOrFile(String data) {
+    // Single Responsibility ~ SOLID
+    private void processData(String data) {
         String[] parts = data.split(",");
 
         if (parts.length >= 2) {
@@ -55,7 +54,8 @@ public class RandomDataListener implements Runnable {
                     writeToFile(data);
                 }
             } catch (NumberFormatException e) {
-                logger.info("Error: Conversion to numeric value failed.");
+                //logger.error("Error: Conversion to numeric value failed.");
+                e.printStackTrace();
             }
         }
     }

@@ -44,5 +44,4 @@ public class RabbitMQConfig {
     public Binding mongoDataQueueBinding(Queue mongoDataQueue, TopicExchange exchange) {
         return BindingBuilder.bind(mongoDataQueue).to(exchange).with(routingKey);
     }
-
 }

@@ -50,7 +50,6 @@ public class MongoDBConsumer {
             newRecord.setContent(message);
             mongoDBRepository.save(newRecord);
         }
-
         logger.info("MongoDB message logged");
     }
 }
