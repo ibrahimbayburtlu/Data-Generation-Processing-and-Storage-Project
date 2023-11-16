@@ -41,7 +41,7 @@ public class RandomDataGenerator implements Runnable {
         }
     }
 
-    private String calculateMD5Hash(String data) {
+    String calculateMD5Hash(String data) {
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");
             byte[] messageDigest = md.digest(data.getBytes(StandardCharsets.UTF_8));
@@ -58,7 +58,7 @@ public class RandomDataGenerator implements Runnable {
         }
     }
 
-    private void writeToSocket(String data) {
+    void writeToSocket(String data) {
         try {
             Socket socket = new Socket("localhost", 12345);
             OutputStream outputStream = socket.getOutputStream();

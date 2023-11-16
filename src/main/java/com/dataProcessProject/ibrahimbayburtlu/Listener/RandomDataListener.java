@@ -39,7 +39,7 @@ public class RandomDataListener implements Runnable {
         }
     }
     // Single Responsibility ~ SOLID
-    private void processData(String data) {
+    void processData(String data) {
         String[] parts = data.split(",");
 
         if (parts.length >= 2) {
@@ -65,7 +65,7 @@ public class RandomDataListener implements Runnable {
         rabbitMQProducer.sendMessage(data);
     }
 
-    private void writeToFile(String data) {
+    void writeToFile(String data) {
         try (FileWriter writer = new FileWriter("filtered_data.txt", true)) {
             writer.write(data + "\n");
         } catch (IOException e) {
