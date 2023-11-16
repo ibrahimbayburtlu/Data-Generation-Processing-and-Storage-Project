@@ -1,6 +1,6 @@
-package com.bundle.ibrahimbayburtlu.Listener;
+package com.dataProcessProject.ibrahimbayburtlu.Listener;
 
-import com.bundle.ibrahimbayburtlu.publisher.RabbitMQProducer;
+import com.dataProcessProject.ibrahimbayburtlu.publisher.RabbitMQProducer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

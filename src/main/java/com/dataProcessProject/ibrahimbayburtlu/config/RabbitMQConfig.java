@@ -1,4 +1,4 @@
-package com.bundle.ibrahimbayburtlu.config;
+package com.dataProcessProject.ibrahimbayburtlu.config;
 
 import org.springframework.amqp.core.*;
 import org.springframework.beans.factory.annotation.Value;

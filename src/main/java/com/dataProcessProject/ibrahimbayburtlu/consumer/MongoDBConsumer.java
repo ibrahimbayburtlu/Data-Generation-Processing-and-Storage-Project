@@ -1,7 +1,7 @@
-package com.bundle.ibrahimbayburtlu.consumer;
+package com.dataProcessProject.ibrahimbayburtlu.consumer;
 
-import com.bundle.ibrahimbayburtlu.entity.MongoEntity;
-import com.bundle.ibrahimbayburtlu.repository.MongoDBRepository;
+import com.dataProcessProject.ibrahimbayburtlu.entity.MongoEntity;
+import com.dataProcessProject.ibrahimbayburtlu.repository.MongoDBRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;

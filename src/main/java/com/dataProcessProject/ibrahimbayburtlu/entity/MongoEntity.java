@@ -1,4 +1,4 @@
-package com.bundle.ibrahimbayburtlu.entity;
+package com.dataProcessProject.ibrahimbayburtlu.entity;
 
 import jakarta.persistence.Id;
 import org.springframework.data.mongodb.core.mapping.Document;

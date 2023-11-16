@@ -1,7 +1,7 @@
-package com.bundle.ibrahimbayburtlu.consumer;
+package com.dataProcessProject.ibrahimbayburtlu.consumer;
 
-import com.bundle.ibrahimbayburtlu.entity.MessageEntity;
-import com.bundle.ibrahimbayburtlu.repository.MessageRepository;
+import com.dataProcessProject.ibrahimbayburtlu.entity.MessageEntity;
+import com.dataProcessProject.ibrahimbayburtlu.repository.MessageRepository;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

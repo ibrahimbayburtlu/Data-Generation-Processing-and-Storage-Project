@@ -1,6 +1,6 @@
-package com.bundle.ibrahimbayburtlu.repository;
+package com.dataProcessProject.ibrahimbayburtlu.repository;
 
-import com.bundle.ibrahimbayburtlu.entity.MessageEntity;
+import com.dataProcessProject.ibrahimbayburtlu.entity.MessageEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface MessageRepository extends JpaRepository<MessageEntity, Long> {

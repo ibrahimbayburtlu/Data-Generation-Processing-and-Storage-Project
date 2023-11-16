@@ -1,10 +1,10 @@
-package com.bundle.ibrahimbayburtlu;
+package com.dataProcessProject.ibrahimbayburtlu;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class BundleApplicationTests {
+class DataProcessApplicationTests {
 
 	@Test
 	void contextLoads() {

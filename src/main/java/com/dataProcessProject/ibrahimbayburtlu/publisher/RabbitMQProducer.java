@@ -1,4 +1,4 @@
-package com.bundle.ibrahimbayburtlu.publisher;
+package com.dataProcessProject.ibrahimbayburtlu.publisher;
 
 
 import org.slf4j.Logger;
